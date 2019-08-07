@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,4 +14,9 @@
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/book/{id}', function (Request $request) {
+    $id = $request->id;
+    return view('book', compact('id'));
 });

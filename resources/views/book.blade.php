@@ -1,5 +1,5 @@
 @extends('layout')
 
 @section('content')
-    <app-component></app-component>
+    <book-component id="{{$id}}"></book-component>
 @endsection

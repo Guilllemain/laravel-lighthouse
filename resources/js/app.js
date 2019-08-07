@@ -3,10 +3,22 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+require('./bootstrap')
+import ApolloClient from 'apollo-boost'
+import VueApollo from 'vue-apollo'
 
-require('./bootstrap');
+
+const apolloClient = new ApolloClient({
+    // You should use an absolute URL here
+    uri: 'http://book-graphql.test/graphql'
+})
+
+const apolloProvider = new VueApollo({
+    defaultClient: apolloClient,
+})
 
 window.Vue = require('vue');
+Vue.use(VueApollo)
 
 /**
  * The following block of code may be used to automatically register your
@@ -19,7 +31,8 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('app-component', require('./components/AppComponent.vue').default);
+Vue.component('book-component', require('./components/BookComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -29,4 +42,5 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const app = new Vue({
     el: '#app',
+    apolloProvider
 });
